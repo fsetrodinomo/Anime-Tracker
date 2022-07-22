@@ -1,5 +1,7 @@
 # AnimeTracker
+App to select your favorite animes and register watched episodes
 
+## Note
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
