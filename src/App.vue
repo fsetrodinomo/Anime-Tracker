@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted , computed } from 'vue'
 const query = ref('')
 //add to anime list
 const my_anime = ref([])
@@ -17,13 +17,13 @@ const my_anime_asc = computed(() => {
 //anime search function
 const searchAnime = () => {
   //everything put in query , query will search in this function
-  const url = 'https://api.jikan.moe/v4/anime?q=${query.value}'
+  const url = `https://api.jikan.moe/v4/anime?q=${query.value}`
   fetch(url)
     //convert the result into a json
     .then(res => res.json())
     // pass the data back
     .then(res => {
-      search_results.value = res.data
+      search_results.value = data.data
     })
 }
 
