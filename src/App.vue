@@ -87,7 +87,7 @@ onMounted(() => {
       v-model="query" 
       @input="handleInput"
       />
-      <button type="submit">Search</button>
+      <button type="submit" class="button">Search</button>
     </form>
 
     <div class="results" v-if="search_results.length > 0">
@@ -99,12 +99,117 @@ onMounted(() => {
           {{anime.synopsis.slice(0, 120)}} ...
           </p>
           <span class="flex-1"></span>
-          <button @click="äddAnime(anime)">Add to my anime</button>
+          <button @click="addAnime(anime)" class="button">Add to  my anime</button>
         </div>
       </div>
-    </div>s
+    </div>
+    <div class="myanime" v-if="my_anime.length > 0">
+    <h2>My anime</h2>
+
+    <div v-for="anime in my_anime_asc" class="anime">
+    <img :src="anime.image" />
+    <h3>{{anime.title}}</h3>
+    <div class="flex-1">
+      <span class="episodes">
+        {{anime.watched_episodes}} / {{anime.total_episodes}}
+      </span>
+      <button 
+      v-if="anime.total_episodes !== anime.watched_episodes"
+      class="button"
+      @click="increasewatch(anime)">+</button>
+      <button 
+      v-if="anime.total_episodes > 0 "
+      class="button"
+      @click="decreasewatch(anime)">-</button>
+      
+    </div>
+    </div>
+    </div>
   </main>
 </template>
 
 <style>
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+body{
+  background-color: white;
+}
+
+main {
+  margin: 0 auto;
+  max-width: 760px;
+  padding: 1.5rem;
+}
+
+h1{
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+form{
+  display: flex;
+  max-width: 400px;
+  margin: 0 auto 1.5rem;
+}
+
+form input{
+  appearance: none;
+  outline: none;
+  border: none;
+  background-color: white;
+
+  display: block;
+  color: #888;
+  font-size: 1.125rem;
+  padding: 0.5rem 1rem;
+  width: 100%;
+}
+
+.button{
+  appearance: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background: none;
+
+  display: block;
+  padding: 0.5rem 1rem;
+  background-image: linear-gradient(to right, deeppink 50%, darkviolet 50%);
+  background-size: 200%;
+  color: #Fff;
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.4s;
+}
+
+.button:hover{
+  background-position: right;
+}
+
+.results{
+  background-color: #fFF;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  max-height: 400px;
+  overflow-y: scroll ;
+  margin-bottom: 1.5rem;
+}
+
+
+.result{
+  display: flex;
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  transition: 0.4s;
+}
+
+
 </style>
