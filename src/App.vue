@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted , computed } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 const query = ref('')
 //add to anime list
 const my_anime = ref([])
@@ -17,18 +17,19 @@ const my_anime_asc = computed(() => {
 //anime search function
 const searchAnime = () => {
   //everything put in query , query will search in this function
+ 
   const url = `https://api.jikan.moe/v4/anime?q=${query.value}`
   fetch(url)
     //convert the result into a json
     .then(res => res.json())
     // pass the data back
-    .then(res => {
+    .then(data => {
       search_results.value = data.data
     })
 }
 
 // handles query inserted at the request field
-const handleInput = e => {
+const handleInput = (e) => {
   //if we dont have the target value
   if (!e.target.value) {
     //return a empty array and reset into nothing
@@ -37,7 +38,7 @@ const handleInput = e => {
 }
 
 //adding a anime to the list
-const addAnime = anime => {
+const addAnime = (anime) => {
   search_results.value = []
   //close the search box if you add a anime
   query.value = ''
@@ -45,16 +46,15 @@ const addAnime = anime => {
   my_anime.value.push({
     id: anime.mal_id,
     title: anime.title,
-    image: anime.images.jpg.images_url,
-    total_episodes: anime.total_episodes,
-    watched_episodes: 0
-
-
+    image: anime.images.jpg.image_url,
+    total_episodes: anime.episodes,
+    watched_episodes: 0,
   })
+
   localStorage.setItem('my_anime', JSON.stringify(my_anime.value))
 }
 
-const increasewatch = anime => {
+const increasewatch = (anime) => {
   //add episode
   anime.watched_episodes++
 
@@ -62,7 +62,7 @@ const increasewatch = anime => {
   localStorage.setItem('my_anime', JSON.stringify(my_anime.value))
 }
 
-const decreasewatch = anime => {
+const decreasewatch = (anime) => {
   //remove episode
   anime.watched_episodes--
 
@@ -81,21 +81,24 @@ onMounted(() => {
     <h1>My anime tracker</h1>
 
     <form @submit.prevent="searchAnime">
-      <input type="text" placeholder="Search for an anime" v-model="query" @input="handleInput" />
+      <input 
+      type="text" 
+      placeholder="Search for an anime" 
+      v-model="query" 
+      @input="handleInput"
+      />
       <button type="submit">Search</button>
     </form>
 
-    <div class="results" v-if="search_results.lengt > 0">
+    <div class="results" v-if="search_results.length > 0">
       <div class="result" v-for="anime in search_results">
+      <img :src="anime.images.jpg.image_url"/>
         <div class="details">
           <h3>{{ anime.title }}</h3>
         </div>
       </div>
-
-
     </div>
   </main>
-
 </template>
 
 <style>
