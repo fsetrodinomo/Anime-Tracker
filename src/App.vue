@@ -17,7 +17,7 @@ const my_anime_asc = computed(() => {
 //anime search function
 const searchAnime = () => {
   //everything put in query , query will search in this function
- 
+
   const url = `https://api.jikan.moe/v4/anime?q=${query.value}`
   fetch(url)
     //convert the result into a json
@@ -81,83 +81,71 @@ onMounted(() => {
     <h1>My anime tracker</h1>
 
     <form @submit.prevent="searchAnime">
-      <input 
-      type="text" 
-      placeholder="Search for an anime" 
-      v-model="query" 
-      @input="handleInput"
-      />
+      <input type="text" placeholder="Search for an anime" v-model="query" @input="handleInput" />
       <button type="submit" class="button">Search</button>
     </form>
 
     <div class="results" v-if="search_results.length > 0">
-      <div class="result" v-for="anime in search_results">
-      <img :src="anime.images.jpg.image_url"/>
+      <div v-for="anime in search_results" class="result">
+        <img :src="anime.images.jpg.image_url" />
         <div class="details">
           <h3>{{ anime.title }}</h3>
           <p :title="anime.synopsis" v-if="anime.synopsis">
-          {{anime.synopsis.slice(0, 120)}} ...
+            {{ anime.synopsis.slice(0, 120) }} ...
           </p>
           <span class="flex-1"></span>
-          <button @click="addAnime(anime)" class="button">Add to  my anime</button>
+          <button @click="addAnime(anime)" class="button">Add to my anime</button>
         </div>
       </div>
     </div>
     <div class="myanime" v-if="my_anime.length > 0">
-    <h2>My anime</h2>
+      <h2>My anime</h2>
 
-    <div v-for="anime in my_anime_asc" class="anime">
-    <img :src="anime.image" />
-    <h3>{{anime.title}}</h3>
-    <div class="flex-1">
-      <span class="episodes">
-        {{anime.watched_episodes}} / {{anime.total_episodes}}
-      </span>
-      <button 
-      v-if="anime.total_episodes !== anime.watched_episodes"
-      class="button"
-      @click="increasewatch(anime)">+</button>
-      <button 
-      v-if="anime.total_episodes > 0 "
-      class="button"
-      @click="decreasewatch(anime)">-</button>
-      
-    </div>
-    </div>
+      <div v-for="anime in my_anime_asc" class="anime">
+        <img :src="anime.image" />
+        <h3>{{ anime.title }}</h3>
+        <div class="flex-1"></div>
+          <span class="episodes">
+            {{ anime.watched_episodes }} / {{ anime.total_episodes }}
+          </span>
+          <button v-if="anime.total_episodes !== anime.watched_episodes" @click="increasewatch(anime)"
+            class="button">+</button>
+          <button v-if="anime.total_episodes > 0" @click="decreasewatch(anime)" class="button">-</button>
+        </div>
     </div>
   </main>
 </template>
 
 <style>
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: 'Fira sans', sans-serif;
 }
 
-body{
+body {
   background-color: white;
 }
 
 main {
   margin: 0 auto;
-  max-width: 760px;
+  max-width: 768px;
   padding: 1.5rem;
 }
 
-h1{
+h1 {
   text-align: center;
   margin-bottom: 1.5rem;
 }
 
-form{
+form {
   display: flex;
-  max-width: 400px;
+  max-width: 480px;
   margin: 0 auto 1.5rem;
 }
 
-form input{
+form input {
   appearance: none;
   outline: none;
   border: none;
@@ -170,7 +158,7 @@ form input{
   width: 100%;
 }
 
-.button{
+.button {
   appearance: none;
   outline: none;
   border: none;
@@ -181,35 +169,106 @@ form input{
   padding: 0.5rem 1rem;
   background-image: linear-gradient(to right, deeppink 50%, darkviolet 50%);
   background-size: 200%;
-  color: #Fff;
+  color: white;
   font-size: 1.125rem;
-  font-weight: 700;
+  font-weight: bold;
   text-transform: uppercase;
   transition: 0.4s;
 }
 
-.button:hover{
+.button:hover {
   background-position: right;
 }
 
-.results{
-  background-color: #fFF;
+.results {
+  background-color: #fff;
   border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  max-height: 400px;
-  overflow-y: scroll ;
+  box-shadow: 0 2px 04px rgba(0, 0, 0, 0.1);
+  max-height: 480px;
+  overflow-y: scroll;
   margin-bottom: 1.5rem;
 }
 
-
-.result{
+.result {
   display: flex;
   margin: 1rem;
   padding: 1rem;
   border: 1px solid #ccc;
-  border-radius: 0.5rem;
+  border-radius: 5px;
   transition: 0.4s;
 }
 
+.result img {
+  width: 100px;
+  border-radius: 1rem;
+  margin-right: 1rem;
+}
 
+.details {
+  flex: 1 1 0%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.details h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.details p {
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.details .button {
+  margin-left: auto;
+}
+
+.flex-1 {
+  display: block;
+  flex: 1 1 0%;
+}
+
+.myanime h2 {
+  color: #888;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.myanime .anime {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  background-color: #FFF;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.anime img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 1rem;
+  margin-right: 1rem;
+}
+
+.anime h3 {
+  color: #888;
+  font-size: 1.125rem;
+}
+
+.anime .episodes {
+  margin-right: 1rem;
+  color: #888;
+}
+
+.anime .button:first-of-type {
+  margin-right: 0.5rem;
+}
+
+.anime .button:last-of-type {
+  margin-right: 0;
+}
 </style>
