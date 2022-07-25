@@ -95,9 +95,14 @@ onMounted(() => {
       <img :src="anime.images.jpg.image_url"/>
         <div class="details">
           <h3>{{ anime.title }}</h3>
+          <p :title="anime.synopsis" v-if="anime.synopsis">
+          {{anime.synopsis.slice(0, 120)}} ...
+          </p>
+          <span class="flex-1"></span>
+          <button @click="äddAnime(anime)">Add to my anime</button>
         </div>
       </div>
-    </div>
+    </div>s
   </main>
 </template>
 
