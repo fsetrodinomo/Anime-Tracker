@@ -93,7 +93,7 @@ onMounted(() => {
           <p :title="anime.synopsis" v-if="anime.synopsis">
             {{ anime.synopsis.slice(0, 120) }} ...
           </p>
-          <span class="flex-1"></span>
+       
           <button @click="addAnime(anime)" class="button">Add to my anime</button>
         </div>
       </div>
