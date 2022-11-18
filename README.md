@@ -1,31 +1,49 @@
-# AnimeTracker
-App to select your favorite animes and register watched episodes
+# Anime tracker
 
-## Note
-This template should help get you started developing with Vue 3 in Vite.
+Anime tracker is a anime tracker with a built in search function.
+The results return the anime title and description. 
+Through a add button the user can add their favorite anime to a list and track the 
+episodes of each anime by clicking on the +/- button. 
+
+# Preview
+
+![Demo Anime tracker](demo/FS_Animetracker.gif)
+
+# Run project
+
+### Clone project 
+```javascript
+git clone https://github.com/fsetrodinomo/AnimeTracker
+```
+
+### Go to directory
+```javascript
+cd AnimeTracker
+```
+
+### Install all the required packages
+```javascript
+npm install
+```
+
+### Compile
+```javascript
+npm run build
+```
+### Run the project
+```javascript
+npm run dev
+```
+
+
+
+
 
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-## Customize configuration
+## License
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+[MIT](https://choosealicense.com/licenses/mit/)
 
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
