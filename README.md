@@ -5,25 +5,38 @@ The results return the anime title and description.
 Through a add button the user can add their favorite anime to a list and track the 
 episodes of each anime by clicking on the +/- button. 
 
-# Installation
-```bash
+# Preview
+
+![Demo Anime tracker](demo/FS_Animetracker.gif)
+
+# Run project
+
+### Clone project 
+```javascript
 git clone https://github.com/fsetrodinomo/AnimeTracker
 ```
 
-# Usage
+### Go to directory
+```javascript
+cd AnimeTracker
+```
+
 ### Install all the required packages
-```sh
+```javascript
 npm install
 ```
+
 ### Compile
-```sh
+```javascript
 npm run build
 ```
 ### Run the project
-
-```sh
+```javascript
 npm run dev
 ```
+
+
+
 
 
 ## Recommended IDE Setup
