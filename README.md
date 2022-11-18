@@ -7,7 +7,7 @@ episodes of each anime by clicking on the +/- button.
 
 # Preview
 
-![Demo Anime tracker](demo/FS_Animetracker.gif)
+![Demo Anime tracker](demo/Demo.gif)
 
 # Run project
 
